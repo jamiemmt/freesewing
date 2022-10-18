@@ -15,6 +15,9 @@ export const back = {
     'hpsToWaistBack',
     'shoulderToShoulder',
     'shoulderSlope',
+    'waistToHHip',
+    'waistToLHip',
+    'bottomCircumference',
   ],
   options: {
     // Static

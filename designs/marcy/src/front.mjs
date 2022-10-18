@@ -22,10 +22,11 @@ export const front = {
     points.cfNeck = new Point(0, measurements.neck * options.collarFactor)
     //added these, for very top and v bottom. How do I change which measurements
     points.top = new Point(0, 0).addCircle(3, 'lining').addCircle(20, 'fabric')
-    points.bottom = new Point(0, measurements.hpsToWaistFront + measurements.waistToSeat)
+
+    points.bottom = new Point(0, measurements.hpsToWaistFront + measurements.waistToLHip)
 
     let lh_front = measurements.bottomCircumference / 4 + 6.35
-    let lh = measurements.hpsToWaistFront + measurements.waistToLH
+    let lh = measurements.hpsToWaistFront + measurements.waistToLHip
 
     points.Bust2 = new Point(0, measurements.hpsToBust)
       .addCircle(3, 'lining')
@@ -34,12 +35,12 @@ export const front = {
     points.WWaist = new Point(0, measurements.hpsToWaistFront)
       .addCircle(3, 'lining')
       .addCircle(20, 'fabric')
-
-    points.HHip = new Point(0, measurements.hpsToWaistFront + measurements.waistToHip)
+    points.HHip = new Point(0, measurements.hpsToWaistFront + measurements.waistToHHip)
       .addCircle(3, 'lining')
       .addCircle(20, 'fabric')
 
-    points.LHip = new Point(0, measurements.hpsToWaistFront + measurements.waistToLH)
+    points.LHip = new Point(0, measurements.hpsToWaistFront + measurements.waistToLHip)
+
       .addCircle(3, 'lining')
       .addCircle(20, 'fabric')
 

@@ -20,33 +20,75 @@ export const front = {
   }) => {
     // Get to work
     points.cfNeck = new Point(0, measurements.neck * options.collarFactor)
-    //added these, for very top and v bottom. How do I change which measurements
-    points.top = new Point(0, 0).addCircle(3, 'lining').addCircle(20, 'fabric')
+    //added these, for very top and v bottom. How do I change which measurements    points.A = new Point(0, 0).addCircle(3, 'lining').addCircle(20, 'fabric').attr('data-text', "A")
+    points.top = new Point(0, 0)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'A')
+
+    points.nn = new Point(100, 0)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'B')
 
     points.bottom = new Point(0, measurements.hpsToWaistFront + measurements.waistToLHip)
 
     let lh_front = measurements.bottomCircumference / 4 + 6.35
+    let hh_front = measurements.hips / 4 + 6.35
     let lh = measurements.hpsToWaistFront + measurements.waistToLHip
+    let hh = measurements.hpsToWaistFront + measurements.waistToHHip
 
     points.Bust2 = new Point(0, measurements.hpsToBust)
       .addCircle(3, 'lining')
       .addCircle(20, 'fabric')
+      .attr('data-text', 'bust')
 
-    points.WWaist = new Point(0, measurements.hpsToWaistFront)
+    points.Bustf = new Point(0, measurements.hpsToWaistFront / 2)
       .addCircle(3, 'lining')
       .addCircle(20, 'fabric')
-    points.HHip = new Point(0, measurements.hpsToWaistFront + measurements.waistToHHip)
+      .attr('data-text', 'bust-test')
+
+    points.neck = new Point(0, 80)
       .addCircle(3, 'lining')
       .addCircle(20, 'fabric')
-
-    points.LHip = new Point(0, measurements.hpsToWaistFront + measurements.waistToLHip)
-
+      .attr('data-text', 'A')
+    points.necko = new Point(measurements.neck / 6 + 6.35, 80)
       .addCircle(3, 'lining')
       .addCircle(20, 'fabric')
+      .attr('data-text', 'B')
 
-    points.LHipOuter = new Point(lh_front, lh).addCircle(3, 'lining').addCircle(20, 'fabric')
+    points.C = new Point(measurements.neck / 6 + 6.35, 80 - (measurements.neck / 6 + 6.35))
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'C')
 
-    points.HHipOuter = new Point(lh_front, lh).addCircle(3, 'lining').addCircle(20, 'fabric')
+    points.IWaist = new Point(0, measurements.hpsToWaistFront)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'IW')
+    points.WWaist = new Point(lh_front, measurements.hpsToWaistFront)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'OW')
+
+    points.HHip = new Point(0, hh)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'HH')
+    points.LHip = new Point(0, lh).attr('data-text', 'LH')
+
+    points.B = new Point(100, 100)
+    points.D = new Point(0, 0).addCircle(3, 'lining').addCircle(20, 'fabric')
+
+    points.LHipOuter = new Point(lh_front, lh)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'LHO')
+
+    points.HHipOuter = new Point(lh_front, hh)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'HHO')
 
     points.hps = new Point(measurements.neck * options.neckWidthFront, 0)
     points.cfNeckCp1 = new Point(points.hps.x * 0.8, points.cfNeck.y)

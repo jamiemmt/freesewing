@@ -18,6 +18,7 @@ export const back = {
     'waistToHHip',
     'waistToLHip',
     'bottomCircumference',
+    'hips',
   ],
   options: {
     // Static
@@ -72,6 +73,73 @@ export const back = {
     // Get to work
     points.cbNeck = new Point(0, measurements.neck * options.backNeckCutout)
     points.hps = new Point(measurements.neck * options.neckWidthBack, 0)
+
+    points.A = new Point(0, 0).addCircle(3, 'lining').addCircle(20, 'fabric').attr('data-text', 'A')
+    points.top = new Point(0, 0)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'A')
+
+    points.nn = new Point(180, 0)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'B')
+
+    points.bottom = new Point(0, measurements.hpsToWaistFront + measurements.waistToLHip)
+
+    let lh_back = measurements.bottomCircumference / 4 - 6.35
+    let hh_back = measurements.hips / 4 - 6.35
+    let lh = measurements.hpsToWaistBack + measurements.waistToLHip
+    let hh = measurements.hpsToWaistBack + measurements.waistToHHip
+
+    points.Bust2 = new Point(0, measurements.hpsToBust)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'bust')
+
+    points.Bustf = new Point(0, measurements.hpsToWaistBack / 2)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'bust-test')
+
+    points.xb = new Point(0, 80)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'xb')
+    points.xbo = new Point(170, 80)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'xb-o')
+
+    points.IWaist = new Point(0, measurements.hpsToWaistBack)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'IW')
+    points.WWaist = new Point(lh_back, measurements.hpsToWaistBack)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'OW')
+
+    points.HHip = new Point(0, hh)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'HH')
+    points.LHip = new Point(0, lh).attr('data-text', 'LH')
+
+    points.B = new Point(100, 100)
+    points.C = new Point(0, 0)
+    points.D = new Point(0, 0).addCircle(3, 'lining').addCircle(20, 'fabric')
+
+    points.LHipOuter = new Point(lh_back, lh)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'LHO')
+
+    points.HHipOuter = new Point(lh_back, hh)
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+      .attr('data-text', 'HHO')
+
     points.cbNeckCp1 = new Point(points.hps.x * 0.8, points.cbNeck.y)
     let slope = measurements.shoulderSlope * options.shoulderSlopeBack * -1
     points.shoulder = utils.beamsIntersect(

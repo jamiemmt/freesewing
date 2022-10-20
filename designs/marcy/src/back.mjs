@@ -19,6 +19,17 @@ export const back = {
     'waistToLHip',
     'bottomCircumference',
     'hips',
+    'shoulder',
+    'hpsToLHipFront',
+    'hpsToLHipBack',
+    'figure_length',
+    'figure_breadth',
+    'cross_front',
+    'cross_back',
+    'hipsCircumference',
+    'seatCircumference',
+    'side',
+    'armhole',
   ],
   options: {
     // Static

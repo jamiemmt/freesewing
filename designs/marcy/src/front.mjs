@@ -19,17 +19,67 @@ export const front = {
     part,
   }) => {
     // Get to work
+
+    let neck = measurements.neck
+    let shoulder = measurements.shoulder
+    let front_length = measurements.hpsToLHipFront
+    let back_length = measurements.hpsToLHipBack
+    let figure_length = measurements.figure_length
+    let figure_breadth = measurements.figure_breadth
+    let cross_front = measurements.cross_front
+    let cross_back = measurements.cross_back
+    let bust = measurements.chest
+    let underbust = measurements.underbust
+    let waist = measurements.waist
+    let hhip = measurements.hipsCircumference
+    let lhip = measurements.seatCircumference
+    let side = measurements.side
+    let armhole = measurements.armhole
+
+    let neck_f = (neck / 6) * 1.1
+    let neck_b = (neck / 6) * 1.17
+    let figure_breadth2 = figure_breadth / 2
+    let xf = cross_front / 2
+    let xb = cross_back / 2
+    let bust4 = bust / 4
+    let bust_f = bust4 * (1 + 1 / 46)
+    let bust_b = bust4 * (1 - 1 / 46)
+    let ub = underbust + 5
+    let cup = bust - underbust
+    let waist_4 = waist / 4
+    let waist_f = waist_4 * 1.04
+    let waist_b = waist_4 * 0.96
+    let hhip_4 = hhip / 4.0
+    let hhip_f = hhip_4 * 1.03
+    let hhip_b = hhip_4 * 0.97
+    let lhip_4 = lhip / 4
+    let lhip_f = lhip_4 * 1.03
+    let lhip_b = lhip_4 * 0.97
+    let ah_2 = armhole / 2
+    let ah_f = ah_2 * 0.97
+    let ah_b = ah_2 * 1.03
+
+    function fhyp(x, y) {
+      return Math.sqrt(x * x + y * y)
+    }
+
+    function fside(x, y) {
+      return Math.sqrt(Math.abs(x * x - y * y))
+    }
+
     points.cfNeck = new Point(0, measurements.neck * options.collarFactor)
     //added these, for very top and v bottom. How do I change which measurements    points.A = new Point(0, 0).addCircle(3, 'lining').addCircle(20, 'fabric').attr('data-text', "A")
-    points.top = new Point(0, 0)
+    points.A = new Point(0, 0)
       .addCircle(3, 'lining')
       .addCircle(20, 'fabric')
-      .attr('data-text', 'A')
+      .attr('data-text', 'top')
 
-    points.nn = new Point(100, 0)
+    points.nn = new Point(100, 0).attr('data-text', 'nn')
+
+    points.nnn = new Point(1000, 800)
       .addCircle(3, 'lining')
       .addCircle(20, 'fabric')
-      .attr('data-text', 'B')
+      .attr('data-text', 'show')
 
     points.bottom = new Point(0, measurements.hpsToWaistFront + measurements.waistToLHip)
 
@@ -38,57 +88,60 @@ export const front = {
     let lh = measurements.hpsToWaistFront + measurements.waistToLHip
     let hh = measurements.hpsToWaistFront + measurements.waistToHHip
 
-    points.Bust2 = new Point(0, measurements.hpsToBust)
-      .addCircle(3, 'lining')
-      .addCircle(20, 'fabric')
-      .attr('data-text', 'bust')
+    points.neck = new Point(0, 80).attr('data-text', 'A')
+    points.necko = new Point(neck_f, 80).attr('data-text', 'B')
 
-    points.Bustf = new Point(0, measurements.hpsToWaistFront / 2)
-      .addCircle(3, 'lining')
-      .addCircle(20, 'fabric')
-      .attr('data-text', 'bust-test')
+    points.C = new Point(neck_f, 80 - neck_b).attr('data-text', 'C')
 
-    points.neck = new Point(0, 80)
-      .addCircle(3, 'lining')
-      .addCircle(20, 'fabric')
-      .attr('data-text', 'A')
-    points.necko = new Point(measurements.neck / 6 + 6.35, 80)
-      .addCircle(3, 'lining')
-      .addCircle(20, 'fabric')
-      .attr('data-text', 'B')
+    points.D = new Point(neck_f, 80 - neck_b / 2).attr('data-text', 'D')
 
-    points.C = new Point(measurements.neck / 6 + 6.35, 80 - (measurements.neck / 6 + 6.35))
-      .addCircle(3, 'lining')
-      .addCircle(20, 'fabric')
-      .attr('data-text', 'C')
+    points.E = new Point(neck_f * 3.5, 80 - neck_b / 2).attr('data-text', 'E')
 
-    points.IWaist = new Point(0, measurements.hpsToWaistFront)
-      .addCircle(3, 'lining')
-      .addCircle(20, 'fabric')
-      .attr('data-text', 'IW')
-    points.WWaist = new Point(lh_front, measurements.hpsToWaistFront)
-      .addCircle(3, 'lining')
-      .addCircle(20, 'fabric')
-      .attr('data-text', 'OW')
+    let shoulder_len = shoulder + 9.525 // should make this custom but for now it's fine
 
-    points.HHip = new Point(0, hh)
-      .addCircle(3, 'lining')
-      .addCircle(20, 'fabric')
-      .attr('data-text', 'HH')
-    points.LHip = new Point(0, lh).attr('data-text', 'LH')
+    points.F = new Point(neck_f + fside(shoulder_len, neck_b / 2), 80 - neck_b / 2).attr(
+      'data-text',
+      'F'
+    )
 
-    points.B = new Point(100, 100)
-    points.D = new Point(0, 0).addCircle(3, 'lining').addCircle(20, 'fabric')
+    let sfrac = (shoulder / shoulder_len) * 0.5
+    points.H = new Point(
+      neck_f + fside(shoulder_len, neck_b / 2) * (1 - sfrac),
+      80 - neck_b / 2 - (neck_b / 2) * sfrac
+    ).attr('data-text', 'H')
+    points.G = new Point(
+      neck_f + fside(shoulder_len, neck_b / 2) * sfrac,
+      80 - neck_b / 2 - (neck_b / 2) * (1 - sfrac)
+    ).attr('data-text', 'G')
 
-    points.LHipOuter = new Point(lh_front, lh)
-      .addCircle(3, 'lining')
-      .addCircle(20, 'fabric')
-      .attr('data-text', 'LHO')
+    points.Bust2 = new Point(0, 80 + measurements.hpsToBust).attr('data-text', 'bust')
 
-    points.HHipOuter = new Point(lh_front, hh)
-      .addCircle(3, 'lining')
-      .addCircle(20, 'fabric')
-      .attr('data-text', 'HHO')
+    points.I = new Point(0, 80 + measurements.hpsToWaistFront / 2).attr('data-text', 'test-bust/I')
+    points.J = new Point(bust_f, 80 + measurements.hpsToWaistFront / 2).attr(
+      'data-text',
+      'test-bust/J'
+    )
+    points.K = new Point(figure_breadth2, 80 + measurements.hpsToWaistFront / 2).attr(
+      'data-text',
+      'test-bust/K'
+    )
+
+    points.L = new Point(figure_breadth2, 80 + fside(figure_length, figure_breadth2)).attr(
+      'data-text',
+      'test-bust/L'
+    )
+
+    points.IWaist = new Point(0, 80 + measurements.hpsToWaistFront).attr('data-text', 'IWF')
+    points.WWaist = new Point(lh_front, 80 + measurements.hpsToWaistFront).attr('data-text', 'OWF')
+
+    points.HHip = new Point(0, 80 + hh).attr('data-text', 'HHF')
+    points.LHip = new Point(0, 80 + lh).attr('data-text', 'LHF')
+
+    points.Dd = new Point(0, 0).addCircle(3, 'lining').addCircle(20, 'fabric')
+
+    points.LHipOuter = new Point(lh_front, 80 + lh).attr('data-text', 'LHO')
+
+    points.HHipOuter = new Point(lh_front, 80 + hh).attr('data-text', 'HHO')
 
     points.hps = new Point(measurements.neck * options.neckWidthFront, 0)
     points.cfNeckCp1 = new Point(points.hps.x * 0.8, points.cfNeck.y)
@@ -238,41 +291,6 @@ export const front = {
       90,
       points.waistDartHem.dist(points.bust) / 2
     )
-
-    // New to be edited
-    paths.seam = new Path()
-      .move(points.top)
-      .line(points.bottom)
-      ._curve(points.waistDartRightCp, points.waistDartRight)
-      .line(points.sideHem)
-      .line(points.bustDartBottom)
-      ._curve(points.bustDartCpBottom, points.bustDartTip)
-      .curve_(points.bustDartCpTop, points.bustDartTop)
-      .line(points.armhole)
-      .curve(points.armholeCp2, points.armholePitchCp1, points.armholePitch)
-      .curve_(points.armholePitchCp2, points.shoulder)
-      .line(points.hps)
-      .curve(points.hpsCp2, points.cfNeckCp1, points.cfNeck)
-      .line(points.cfHem)
-      .close()
-      .attr('class', 'fabric')
-
-    paths.seam = new Path()
-      .move(points.top)
-      .line(points.bottom)
-      ._curve(points.waistDartRightCp, points.waistDartRight)
-      .line(points.sideHem)
-      .line(points.bustDartBottom)
-      ._curve(points.bustDartCpBottom, points.bustDartTip)
-      .curve_(points.bustDartCpTop, points.bustDartTop)
-      .line(points.armhole)
-      .curve(points.armholeCp2, points.armholePitchCp1, points.armholePitch)
-      .curve_(points.armholePitchCp2, points.shoulder)
-      .line(points.hps)
-      .curve(points.hpsCp2, points.cfNeckCp1, points.cfNeck)
-      .line(points.cfHem)
-      .close()
-      .attr('class', 'fabric')
 
     paths.saBase = new Path()
       .move(points.cfHem)

@@ -31,7 +31,7 @@ const ContactPage = (props) => {
           key="type"
         />
         <meta property="og:article:author" content="Joost De Cock" key="author" />
-        <meta property="og:image" content="/og/contact/og.png" key="image" />
+        <meta property="og:image" content="https://freesewing.dev/og/contact/og.png" key="image" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -175,7 +175,7 @@ const ContactPage = (props) => {
               <Yes /> Is it private?
             </li>
             <li className="list-none">
-              <Yes /> Will the answer be authoritative? (because since{' '}
+              <Yes /> Will the answer be authoritative? (
               <a href="https://twitter.com/j__st">joost</a> runs the Twitter account)
             </li>
           </ul>

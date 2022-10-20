@@ -19,15 +19,11 @@ const HomePage = () => {
         <meta property="og:type" content="article" key="type" />
         <meta
           property="og:description"
-          content="Documentation and tutorials for FreeSewing developers and contributors. Plus our Developers Blog"
+          content="Documentation and tutorials for FreeSewing developers and contributors"
           key="description"
         />
         <meta property="og:article:author" content="Joost De Cock" key="author" />
-        <meta
-          property="og:image"
-          content="https://canary.backend.freesewing.org/og-img/en/dev/"
-          key="image"
-        />
+        <meta property="og:image" content="https://freesewing.dev/og/og.png" key="image" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -102,7 +98,7 @@ const HomePage = () => {
                 <h3>We&apos;re working on it 🤓</h3>
                 <p>
                   The upcoming version 3 of FreeSewing is currently under development. Our core
-                  library has stabilized and we have updating our documentation for FreeSewing
+                  library has stabilized and we have updated our documentation for FreeSewing
                   version 3.
                 </p>
                 <Popout note>
@@ -117,7 +113,7 @@ const HomePage = () => {
                 <h3>What&apos;s changed?</h3>
                 <p>
                   Check{' '}
-                  <PageLink href="/guides/v3/new" txt="the FreeSewing version 3 migration guide" />{' '}
+                  <PageLink href="/guides/v3/migration" txt="the FreeSewing version 3 migration guide" />{' '}
                   to learn about what is new in version 3 of FreeSewing, and what changes you should
                   make in your own designs to port them to version 3.
                 </p>

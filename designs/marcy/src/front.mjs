@@ -22,7 +22,7 @@ export const front = {
 
     let neck = measurements.neck
     let shoulder = measurements.shoulder
-    let front_length = measurements.hpsToLHipFront
+    let front_length = measurements.front_length
     let back_length = measurements.hpsToLHipBack
     let figure_length = measurements.figure_length
     let figure_breadth = measurements.figure_breadth
@@ -76,7 +76,7 @@ export const front = {
 
     points.nn = new Point(100, 0).attr('data-text', 'nn')
 
-    points.nnn = new Point(1000, 800)
+    points.nnn = new Point(300, 1100)
       .addCircle(3, 'lining')
       .addCircle(20, 'fabric')
       .attr('data-text', 'show')
@@ -85,8 +85,8 @@ export const front = {
 
     let lh_front = measurements.bottomCircumference / 4 + 6.35
     let hh_front = measurements.hips / 4 + 6.35
-    let lh = measurements.hpsToWaistFront + measurements.waistToLHip
-    let hh = measurements.hpsToWaistFront + measurements.waistToHHip
+    let lh = front_length + measurements.waistToLHip
+    let hh = front_length + measurements.waistToHHip
 
     points.neck = new Point(0, 80).attr('data-text', 'A')
     points.necko = new Point(neck_f, 80).attr('data-text', 'B')
@@ -116,33 +116,102 @@ export const front = {
 
     points.Bust2 = new Point(0, 80 + measurements.hpsToBust).attr('data-text', 'bust')
 
-    points.I = new Point(0, 80 + measurements.hpsToWaistFront / 2).attr('data-text', 'test-bust/I')
-    points.J = new Point(bust_f, 80 + measurements.hpsToWaistFront / 2).attr(
+    let tbust_y = front_length/2
+
+    points.I = new Point(0, 80 + tbust_y).attr('data-text', 'test-bust/I')
+    points.J = new Point(bust_f, 80 + tbust_y).attr(
       'data-text',
       'test-bust/J'
     )
-    points.K = new Point(figure_breadth2, 80 + measurements.hpsToWaistFront / 2).attr(
+    points.K = new Point(figure_breadth2, 80 +  tbust_y).attr(
       'data-text',
       'test-bust/K'
     )
 
     points.L = new Point(figure_breadth2, 80 + fside(figure_length, figure_breadth2)).attr(
       'data-text',
-      'test-bust/L'
+      'L'
+    )
+     points.M = new Point(0,points.L.y).attr(
+      'data-text',
+      'M'
     )
 
-    points.IWaist = new Point(0, 80 + measurements.hpsToWaistFront).attr('data-text', 'IWF')
-    points.WWaist = new Point(lh_front, 80 + measurements.hpsToWaistFront).attr('data-text', 'OWF')
+    points.IWaist = new Point(0, 80 + front_length).attr('data-text', 'IWF')
+    points.WWaist = new Point(lh_front, 80 + front_length).attr('data-text', 'OWF')
+    points.N = new Point(figure_breadth2,  80 + front_length).attr('data-text', 'N')
+      .addCircle(3, 'lining')
+      .addCircle(20, 'fabric')
+   
 
-    points.HHip = new Point(0, 80 + hh).attr('data-text', 'HHF')
-    points.LHip = new Point(0, 80 + lh).attr('data-text', 'LHF')
+    points.HHip = new Point(0, 80 +  hh).attr('data-text', 'HHF')
+    points.FHHip = new Point(figure_breadth2, 80 + hh).attr('data-text', 'FHF')
+    points.HHipOuter = new Point(lh_front, 80 + hh).attr('data-text', 'HHO')
+    
+    points.LHip = new Point(0, 80 +  lh).attr('data-text', 'LHF')
+    points.LHipOuter = new Point(lh_front, 80  +lh).attr('data-text', 'LHO')
+    points.O = new Point(figure_breadth2, 80 + lh).attr('data-text', 'O')
+   
+    let wdiff = lhip - waist
+    let wdart = 20 // This is 3/4 inch, should be relative and a function of wdiff eventually. Not actually sure if this is what I want anyway
 
+
+    points.P = new Point(points.N.x - wdart/2, points.N.y).attr('data-text', 'P')
+    
+    points.Q = new Point(points.N.x + wdart/2, points.N.y).attr('data-text', 'Q')
+    points.R = new Point(points.IWaist.x, points.IWaist.y + 12.5).attr('data-text', 'R')
+    points.S = new Point(points.O.x, points.O.y - 75).attr('data-text', 'S')
+    points.T = new Point(points.P.x , points.P.y+12.5).attr('data-text', 'T')
+    points.U = new Point(points.Q.x, points.Q.y+12.5).attr('data-text', 'U')
+
+    points.V = new Point(points.L.x, points.L.y+18.75).attr('data-text', 'V')
+    points.W = new Point(points.M.x+bust_f, points.M.y).attr('data-text', 'W')
+    points.Wg = new Point(points.W.x, points.W.y- 100).attr('data-text', 'Ws')
+
+    points.X = new Point(points.IWaist.x + waist_f + wdart, points.IWaist.y).attr('data-text', 'X')
+    // This will need to be changed, add in the portion of the dart still here
+    let wdart_hh = 6.25
+    points.Y = new Point(points.HHip.x + hhip_f + wdart_hh, points.HHip.y).attr('data-text', 'Y')
+    points.Z = new Point(points.LHip.x + lhip_f , points.LHip.y).attr('data-text', 'Z')
+     points.Z = new Point(points.LHip.x + lhip_f , points.LHip.y).attr('data-text', 'Z')
+
+
+    let shoulderdartw = .375 * 25 // This is for an A cup, can be modified
+    let sidedartw = .75 * 25 // This is also for an A cup. tbm
+    let sidew = side + sidedartw
+    let yadds = fside(sidew, points.X.x - points.J.x)
+
+    points.a =  new Point(points.J.x , points.X.y - yadds).attr('data-text', 'a')
+    points.b =  new Point(0, points.X.y - yadds).attr('data-text', 'b')
+    points.c = new Point(points.X.x + .3 * (points.W.x - points.X.x), points.X.y +.3 * (-points.X.y + points.W.y)).attr('data-text', 'c')
+    points.c8 = new Point(points.c.x - .125 * 25, points.c.y).attr('data-text', 'c8')
+    points.d =  new Point(points.J.x, points.J.y-.5 * 25).attr('data-text', 'd')
+    points.e =  new Point(points.J.x, points.J.y+.5 * 25).attr('data-text', 'e')
+    points.bdl = new Point(points.V.x + 1/3 * (points.P.x - points.V.x) - .25 * 25, points.V.y + 1/3 * (points.P.y - points.V.y) ).attr('data-text', 'bdl')
+       points.bdr = new Point(points.V.x + 1/3 * (points.Q.x - points.V.x) + .25 * 25, points.V.y + 1/3 * (-points.V.y + points.Q.y) ).attr('data-text', 'bdr')
+      points.bdrr = new Point(points.Q.x +6, points.Q.y-85 ).attr('data-text', 'bdrr')
+       points.bdll = new Point(points.P.x -6, points.P.y-85 ).attr('data-text', 'bdrr')
+  
     points.Dd = new Point(0, 0).addCircle(3, 'lining').addCircle(20, 'fabric')
 
-    points.LHipOuter = new Point(lh_front, 80 + lh).attr('data-text', 'LHO')
+    points.xf = new Point(xf, points.neck.y+3* 25).attr('data-text', 'xf')
+    let xff = (points.xf.y - points.H.y)/ (-points.H.y + points.L.y)
+    points.f = new Point(points.L.x + xff * (points.H.x - points.L.x) +.125 * 25,  points.xf.y ).attr('data-text', 'f')
+   // points.g = new Point(points.L.x + xff * (points.G.x - points.L.x) - .125 * 25, points.f.y).attr('data-text', 'g')
+   // I'm totally guessing on this width. It should be the width of the dart at this pt which is .125 * 25 + the width before we bumped it out
+   points.g = new Point(points.xf.x+ .25 * 25, points.xf.y).attr('data-text', 'g')
+   points.h = new Point(points.g.x, points.a.y).attr('data-text', 'h')
+   points.i = new Point(points.h.x + 25/Math.sqrt(2), points.h.y-  25/Math.sqrt(2)).attr('data-text', 'i')
 
-    points.HHipOuter = new Point(lh_front, 80 + hh).attr('data-text', 'HHO')
+   let ahd = .375 * 25 // based on a cup probably should be relative
+   points.j = new Point(points.i.x + .5 * ahd/Math.sqrt(2),points.i.y + .5 * ahd/Math.sqrt(2)).attr('data-text', 'j')
+   points.k = new Point(points.i.x - .5 * ahd/Math.sqrt(2),points.i.y - .5 * ahd/Math.sqrt(2)).attr('data-text', 'k')
+  points.l = new Point(points.necko.x - 25/Math.sqrt(2), points.necko.y - 25/Math.sqrt(2) ).attr('data-text', 'lllllll')
 
+  let ahtotal = armhole + ahd
+  // probably should check that this is what the armhole ends up being ahtotal, the primary change will be to bring F down to make it the right length
+
+/*
     points.hps = new Point(measurements.neck * options.neckWidthFront, 0)
     points.cfNeckCp1 = new Point(points.hps.x * 0.8, points.cfNeck.y)
     points.hpsCp2 = new Point(points.hps.x, points.cfNeck.y / 2)
@@ -290,155 +359,55 @@ export const front = {
     points.waistDartRightCp = points.waistDartRight.shift(
       90,
       points.waistDartHem.dist(points.bust) / 2
-    )
+    )*/
 
+    // darts n@
     paths.saBase = new Path()
-      .move(points.cfHem)
-      .line(points.waistDartLeft)
-      .line(points.waistDartRight)
-      .line(points.sideHem)
-      .line(points.bustDartBottom)
-      .line(points.bustDartEdge)
-      .line(points.bustDartTop)
-      .line(points.armhole)
-      .curve(points.armholeCp2, points.armholePitchCp1, points.armholePitch)
-      .curve_(points.armholePitchCp2, points.shoulder)
-      .line(points.hps)
-      .curve(points.hpsCp2, points.cfNeckCp1, points.cfNeck)
-      .hide()
+      .move(points.G)
+      .line(points.L)
+      .curve_(points.L,   points.H)
+      .move(points.V)
+      .curve(points.V, points.bdll,  points.P)
+      .line(points.T)
+      .line(points.S)
+       .move(points.V)
+      .curve(points.V, points.bdrr , points.Q)
+       .line(points.U)
+      .line(points.S)
+      .move(points.d)
+      .line(points.L)
+      .line(points.e)
+      .move(points.j)
+       .line(points.L)
+      .line(points.k)
+      .attr('class', 'fabric')
+
+    paths.saBase1 = new Path()
+      .move(points.neck)
+      .line(points.necko)
+      .line(points.C)
+      .line(points.D)
+      .line(points.C)
+      .line(points.F)
+	  .curve(points.xf, points.h,   points.a)//needs to be fixed somewhat, but actually pretty good
+      .line(points.Y)
+      .line(points.Z)
+      .line(points.LHip)
+      .line(points.neck)
+	  .curve(points.neck, points.necko, points.C)// needs to be fixed too, actually pretty good at this point.
+      .attr('class', 'fabric')
 
     if (complete) {
-      points.titleAnchor = new Point(points.armholePitch.x / 2, points.armholePitchCp2.y)
-      macro('title', {
-        at: points.titleAnchor,
-        nr: 1,
-        title: 'front',
-      })
-      points.scaleboxAnchor = points.titleAnchor.shift(-90, 70)
-      macro('scalebox', { at: points.scaleboxAnchor })
-      paths.dart = new Path()
-        .move(points.bustDartTop)
-        .line(points.bustDartEdge)
-        .line(points.bustDartBottom)
-        .attr('class', 'help')
-      macro('cutonfold', {
-        from: points.cfNeck,
-        to: points.cfHem,
-        grainline: true,
-      })
-      macro('sprinkle', {
-        snippet: 'notch',
-        on: ['bust', 'armholePitch', 'cfBust'],
-      })
+   
 
       if (sa) {
-        paths.sa = paths.saBase.offset(sa).line(points.cfNeck).attr('class', 'fabric sa')
-        paths.sa = paths.sa.move(points.cfHem).line(paths.sa.start())
+       // paths.sa = paths.saBase.offset(sa).line(points.cfNeck).attr('class', 'fabric sa')
+        //paths.sa = paths.sa.move(points.cfHem).line(paths.sa.start())
       }
       if (paperless) {
-        macro('vd', {
-          from: points.cfHem,
-          to: points.waistDartTip,
-          x: 0 - 15,
-        })
-        macro('vd', {
-          from: points.cfHem,
-          to: points.bust,
-          x: 0 - 30,
-        })
-        macro('vd', {
-          from: points.cfHem,
-          to: points.cfNeck,
-          x: 0 - 45,
-        })
-        macro('vd', {
-          from: points.cfHem,
-          to: points.hps,
-          x: 0 - 60,
-        })
-        macro('hd', {
-          from: points.cfBust,
-          to: points.bust,
-          y: points.bust.y - 15,
-        })
-        macro('hd', {
-          from: points.cfBust,
-          to: points.bustDartTip,
-          y: points.bust.y - 30,
-        })
-        macro('hd', {
-          from: points.cfHem,
-          to: points.waistDartLeft,
-          y: points.cfHem.y + sa + 15,
-        })
-        macro('hd', {
-          from: points.cfHem,
-          to: points.waistDartRight,
-          y: points.cfHem.y + sa + 30,
-        })
-        macro('hd', {
-          from: points.cfHem,
-          to: points.sideHem,
-          y: points.cfHem.y + sa + 45,
-        })
-        macro('hd', {
-          from: points.cfHem,
-          to: points.bustDartBottom,
-          y: points.cfHem.y + sa + 60,
-        })
-        macro('hd', {
-          from: points.cfHem,
-          to: points.bustDartTop,
-          y: points.cfHem.y + sa + 75,
-        })
-        macro('vd', {
-          from: points.sideHem,
-          to: points.bustDartBottom,
-          x: points.bustDartTop.x + sa + 15,
-        })
-        macro('vd', {
-          from: points.sideHem,
-          to: points.bustDartTop,
-          x: points.bustDartTop.x + sa + 30,
-        })
-        macro('vd', {
-          from: points.sideHem,
-          to: points.armhole,
-          x: points.bustDartTop.x + sa + 45,
-        })
-        macro('vd', {
-          from: points.sideHem,
-          to: points.armholePitch,
-          x: points.bustDartTop.x + sa + 60,
-        })
-        macro('vd', {
-          from: points.sideHem,
-          to: points.shoulder,
-          x: points.bustDartTop.x + sa + 75,
-        })
-        macro('hd', {
-          from: points.cfNeck,
-          to: points.hps,
-          y: points.hps.y - sa - 15,
-        })
-        macro('hd', {
-          from: points.cfNeck,
-          to: points.armholePitch,
-          y: points.hps.y - sa - 30,
-        })
-        macro('hd', {
-          from: points.cfNeck,
-          to: points.shoulder,
-          y: points.hps.y - sa - 45,
-        })
-        macro('hd', {
-          from: points.cfNeck,
-          to: points.armhole,
-          y: points.hps.y - sa - 60,
-        })
+	  
       }
     }
-
-    return part
+      return part
   },
 }

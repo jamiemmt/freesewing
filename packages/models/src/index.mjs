@@ -2,7 +2,7 @@ import { measurements, neckstimate, CISFEMALE, CISMALE } from './neckstimate.mjs
 import { degreeMeasurements } from '../../../config/measurements.mjs'
 
 const getMeasurements = (size, index) => {
-  const all = {}
+  let all = {}
   for (const m of measurements) {
     all[m] = neckstimate(size * 10, m, index)
   }
@@ -11,7 +11,7 @@ const getMeasurements = (size, index) => {
 }
 
 const multiplyMeasurements = (factor, index) => {
-  const all = {}
+  let all = {}
   const base = index === 0 ? '340' : '380'
   for (const m of measurements) {
     if (degreeMeasurements.indexOf(m) !== -1)
@@ -32,6 +32,101 @@ export const sizes = {
   cisFemaleGiant: [150, 200, 250, 300],
   cisMaleGiant: [150, 200, 250, 300],
 }
+
+let jam = getMeasurements(36, CISFEMALE)
+jam.highBust = 899
+jam.chestCircumference = 914.4
+jam.underbust = 838.2
+jam.waistCircumference = 736.6
+jam.wastBack = 356.6
+jam.bustSpan = 190.55
+jam.neckCircumference = 360.7
+jam.hpsToBust = 241.3
+jam.hpsToWaistFront = 457.2
+jam.hpsToWaistBack = 431.8
+jam.shouldertoshoulder = 381
+jam.waistToHHip = 100
+jam.waistToLHip = 203.2
+jam.bottomCircumference = 1016
+jam.hipsCircumference = 863.6
+jam.shoulder = 114.3
+jam.front_length = 355.6
+jam.back_length = 368.3
+jam.hpsToLHipFront = 457.2
+jam.hpsToLHipBack = 457.2
+jam.figure_length = 209.5
+jam.figure_breadth = 196.8
+jam.cross_front = 368.3
+jam.cross_back = 406.4
+jam.armhole = 421.8
+jam.seatCircumference = 1016
+jam.side = 215.9
+jam.hips = 900
+
+export const jamie = jam
+
+let jam2 = getMeasurements(36, CISFEMALE)
+jam2.biceps = 317.5 //12.5in
+jam2.chestCircumference = 914.4
+jam2.bust = 914.4
+jam2.underbust = 838.2 //33in
+jam2.waistToHHip = 76.2 //3 in
+jam2.waistToLHip = 177.8 //7 or 7.5 in
+jam2.bottomCircumference = 990.6 //39 in
+jam2.hips = 863.6 //34
+jam2.highBust = 876.3 //34.5
+jam2.shoulder = 127 //5 in
+jam2.frontLength = 381 //15
+jam2.backLength = 381 //15
+jam2.figureLength = 190.5 //7.5
+jam2.figureBreadth = 184.15 //7.25
+jam2.crossFront = 355.6 //14
+jam2.crossBack = 444.5 // 17.5
+jam2.armhole = 421.8
+jam2.hipsCircumference = 863.6
+jam2.seatCircumference = 990.6
+jam2.side = 203.2 //8 in
+export const jamie2 = jam2
+
+/*ankle: [245, 235],
+  biceps: [270, 350],
+  bustFront: [480, 560], // FIXME: Estimate
+  bustPointToUnderbust: [100, 60], // FIXME: Estimate
+  bustSpan: [160, 190], // FIXME: Estimate
+  chest: [925, 1000],
+  crossSeam: [740, 870],
+  crossSeamFront: [370, 410],
+  crotchDepth: [270, 340],
+  heel: [315, 360],
+  head: [565, 590],
+  highBust: [865, 1030],
+  highBustFront: [440, 570], // FIXME: Estimate
+  hips: [900, 840],
+  hpsToBust: [275, 280],
+  hpsToWaistBack: [395, 470],
+  hpsToWaistFront: [400, 460], // FIXME: Estimate
+  inseam: [765, 780],
+  knee: [380, 410],
+  neck: [340, 380],
+  seat: [1010, 1020],
+  seatBack: [520, 560],
+  shoulderSlope: [13, 13],
+  shoulderToElbow: [340, 360],
+  shoulderToShoulder: [415, 450],
+  shoulderToWrist: [590, 630],
+  underbust: [780, 980], // FIXME: Estimate
+  upperLeg: [570, 625],
+  waist: [750, 810],
+  waistBack: [380, 410],
+  waistToArmhole: [170, 210],
+  waistToFloor: [1050, 1160],
+  waistToHips: [125, 130],
+  waistToKnee: [600, 640],
+  waistToSeat: [250, 270],
+  waistToUnderbust: [80, 55], // FIXME: Estimate
+  waistToUpperLeg: [285, 340],
+  wrist: [165, 175],
+}*/
 
 export const cisFemaleAdult28 = getMeasurements(28, CISFEMALE)
 export const cisFemaleAdult30 = getMeasurements(30, CISFEMALE)
@@ -90,6 +185,8 @@ export const cisFemaleAdult = {
   42: cisFemaleAdult42,
   44: cisFemaleAdult44,
   46: cisFemaleAdult46,
+  jamie: jamie,
+  jamie2: jamie2,
 }
 export const cisMaleAdult = {
   32: cisMaleAdult32,

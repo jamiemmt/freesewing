@@ -137,6 +137,13 @@
       "difficulty": 3,
       "tags": ["tops", "swimwear"]
     },
+    "beyonce": {
+      "description": "A FreeSewing pattern that needs a description",
+      "code": "Coder name",
+      "design": "Designer name",
+      "difficulty": 1,
+      "tags": ["tagname"]
+    },
     "bruce": {
       "description": "A FreeSewing pattern for boxer briefs",
       "code": "Joost De Cock",
